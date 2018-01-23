@@ -56,7 +56,7 @@ describe('key generation', () => {
     it('uses function in key', () => {
       const testUIKey = 'ui-key'
       const tree = render(<WrappedTestWithFunctionKey id={testUIKey} />);
-      const c = TestUtils.findRenderedComponentWithType(tree, Test);
+      const c = ReactTestUtils.findRenderedComponentWithType(tree, Test);
       const { uiKey } = c.props;
 
       assert(uiKey === testUIKey, 'uiKey matches testUIKey');
