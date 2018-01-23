@@ -1,4 +1,4 @@
-[![Circle CI](https://circleci.com/gh/tonyhb/redux-ui.svg?style=svg)](https://circleci.com/gh/tonyhb/redux-ui)
+[![Circle CI](https://circleci.com/gh/jhorowitz-firedrum/redux-ui.svg?style=svg)](https://circleci.com/gh/jhorowitz-firedrum/redux-ui)
 
 # redux-ui: ui state without profanity
 
@@ -250,5 +250,6 @@ All of these goals should be easy to achieve.
 
 MIT license.
 
-Written by [Franklin Ta](https://github.com/fta2012) and [Tony Holdstock-Brown](https://github.com/tonyhb).
+Developed by [Jonathan Horowitz](https://github.com/jhorowitz-firedrum).
 
+Based on the original code written by [Franklin Ta](https://github.com/fta2012) and [Tony Holdstock-Brown](https://github.com/tonyhb).
