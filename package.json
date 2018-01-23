@@ -3,9 +3,19 @@
   "version": "0.1.1",
   "description": "UI state management for Redux and React",
   "main": "transpiled/index.js",
+  "files": [
+    "transpiled"
+  ],
   "scripts": {
-    "prepublish": "babel -d transpiled src",
-    "test": "mocha  --compilers js:babel-register --recursive --require ./test/setup.js"
+    "init": "mkdir transpiled",
+    "clean": "del-cli transpiled",
+    "prebuild": "npm run clean && npm run init",
+    "build": "babel ./src -d ./transpiled",
+    "prepare": "npm run build",
+    "pretest": "npm run build",
+    "test": "mocha --compilers js:babel-register --recursive --require ./test/setup.js",
+    "start": "npm run dev",
+    "dev": "npm test -- -w"
   },
   "repository": {
     "type": "git",
@@ -30,17 +40,18 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.4.1",
+    "del-cli": "^1.1.0",
     "jsdom": "^7.2.1",
     "mocha": "^2.3.4",
-    "react-dom": "^16.0.0",
-    "react": "^16.0.0"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "dependencies": {
     "babel-register": "^6.6.0",
     "immutable": "^3.7.5",
     "invariant": "^2.2.0",
     "prop-types": "^15.5.7",
-    "react-redux": "^4.4.8 || ^5.0.4",
+    "react-redux": "^5.0.6",
     "redux": "^3.0.4"
   },
   "peerDependencies": {
