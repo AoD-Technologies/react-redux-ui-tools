@@ -1,3 +1,16 @@
+# v0.1.2
+- Add option to use POJOs for UI state
+- Fix the build system so that published updates get properly installed
+- Install react as a dependency (thanks @j4k)
+- Add missing closing div tag to README.md examples (thanks @Eksapsy)
+- Properly wrap displayName according to [best practices](https://reactjs.org/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging) (thanks @skeate)
+- Remove redundant references to $(npm_bin) (also fixes Windows builds) (thanks @baerrach)
+- Add ability to specify a function of props to return dynamic keys (thanks @dfguo)
+- Avoid creating new functions at each render pass (thanks @gcazaciuc)
+
+# v0.1.1
+- Add customReducer decorator API documentation to README.md
+
 # v0.1.0
 - Update dependencies to work with React 15 (thanks @kurtfunai)
 - Allow functions inside updateUI (`this.props.updateUI('username', v => v.toUpperCase());`)
