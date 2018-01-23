@@ -43,6 +43,13 @@ import { reducer as uiReducer } from 'redux-ui'
 combineReducers({ ...yourReducers, ui: uiReducer })
 ```
 
+***NOTE:*** If you wish to use POJOs instead of Immutable.JS for ui state, add the redux-ui reducer with a third parameter set to true, as follows:
+```js
+import { reducer as uiReducer } from 'redux-ui'
+// ...
+combineReducers({ ...yourReducers, ui: (state, action) => uiReducer(state, action, true) })
+```
+
 **Step 2**: In each 'scene' or parent component add the UI decorator with the key in
 which to save all state:
 ```

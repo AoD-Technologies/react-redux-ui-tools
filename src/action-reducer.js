@@ -1,7 +1,8 @@
 'use strict';
 
 import { Map } from 'immutable';
-import invariant from 'invariant'
+import invariant from 'invariant';
+import { get, getIn, setIn, updateIn, deleteIn, withMutations } from './utils';
 
 // For updating multiple UI variables at once.  Each variable might be part of
 // a different context; this means that we need to either call updateUI on each
@@ -27,7 +28,22 @@ export const defaultState = new Map({
   })
 });
 
-export default function reducer(state = defaultState, action) {
+export const defaultPOJOState = {
+  __reducers: {
+    // This contains a map of component paths (joined by '.') to an object
+    // containing the fully qualified path and the reducer function:
+    // 'parent.child': {
+    //   path: ['parent', 'child'],
+    //   func: (state, action) => { ... }
+    // }
+  }
+};
+
+export default function reducer(state, action, usePOJOs) {
+  if (typeof state === 'undefined') {
+    state = usePOJOs ? defaultPOJOState : defaultState;
+  }
+
   let key = action.payload && (action.payload.key || []);
 
   if (!Array.isArray(key)) {
@@ -38,15 +54,15 @@ export default function reducer(state = defaultState, action) {
     case UPDATE_UI_STATE:
       const { name, value } = action.payload;
       if (typeof value === 'function') {
-        state = state.updateIn(key.concat(name), value);
+        state = updateIn(state, key.concat(name), value);
       } else {
-        state = state.setIn(key.concat(name), value);
+        state = setIn(state, key.concat(name), value);
       }
       break;
 
     case MASS_UPDATE_UI_STATE:
       const { uiVars, transforms } = action.payload;
-      state = state.withMutations( s => {
+      state = withMutations( state, s => {
         Object.keys(transforms).forEach(k => {
           const path = uiVars[k];
           invariant(
@@ -62,14 +78,14 @@ export default function reducer(state = defaultState, action) {
 
     case SET_DEFAULT_UI_STATE:
       // Replace all UI under a key with the given values
-      state = state.setIn(key, new Map(action.payload.value));
+      state = setIn(state, key, usePOJOs ? action.payload.value : new Map(action.payload.value));
       break;
 
     case MOUNT_UI_STATE:
       const { defaults, customReducer } = action.payload;
-      state = state.withMutations( s => {
+      state = withMutations( state, s => {
         // Set the defaults for the component
-        s.setIn(key, new Map(defaults));
+        s.setIn(key, usePOJOs ? defaults : new Map(defaults));
 
         // If this component has a custom reducer add it to the list.
         // We store the reducer func and UI path for the current component
@@ -90,7 +106,7 @@ export default function reducer(state = defaultState, action) {
       // We have to use deleteIn as react unmounts root components first;
       // this means that using setIn in child contexts will fail as the root
       // context will be stored as undefined in our state
-      state= state.withMutations(s => {
+      state= withMutations(state, s => {
         s.deleteIn(key);
         // Remove any custom reducers
         s.deleteIn(['__reducers', key.join('.')]);
@@ -98,9 +114,9 @@ export default function reducer(state = defaultState, action) {
       break;
   }
 
-  const customReducers = state.get('__reducers');
-  if (customReducers.size > 0) {
-    state = state.withMutations(mut => {
+  const customReducers = get(state, '__reducers');
+  if (customReducers[usePOJOs ? 'length' : 'size'] > 0) {
+    state = withMutations(state, mut => {
       customReducers.forEach(r => {
         // This calls each custom reducer with the UI state for each custom
         // reducer with the component's UI state tree passed into it.
