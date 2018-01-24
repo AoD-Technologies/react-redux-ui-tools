@@ -8,12 +8,12 @@ import shallowEqual from 'react-redux/lib/utils/shallowEqual';
 import ui, { reducer } from '../../src';
 import { render, renderAndFind } from '../utils/render.js';
 
-describe('@connect options', () => {
+describe('Options', () => {
   class Child extends Component {
     render = () => <p>Child</p>
   }
 
-  it('allows you to pass mergeProps into connect', () => {
+  it('allows you to pass \'mergeProps\' into @connect', () => {
     // Poor mans spying
     let called = false;
     const mergeProps = (stateProps, dispatchProps, ownProps) => {
@@ -30,8 +30,7 @@ describe('@connect options', () => {
     assert.isTrue(called);
   });
 
-
-  it('allows you to pass options into connect', () => {
+  it('allows you to pass \'options\' into @connect', () => {
     const WithRef = ui({
       state: { name: 'child' },
       options: { withRef: true }

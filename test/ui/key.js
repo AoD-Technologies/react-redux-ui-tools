@@ -7,8 +7,7 @@ import ReactTestUtils from 'react-dom/test-utils';
 import ui, { reducer } from '../../src';
 import { render, renderAndFind } from '../utils/render.js';
 
-describe('key generation', () => {
-
+describe('Key Generation', () => {
   class Test extends Component {
     render() { return <p>Hi</p>; }
   }
@@ -18,7 +17,7 @@ describe('key generation', () => {
   const WrappedTestWithKey = ui({key: testKey})(Test);
   const WrappedTestWithFunctionKey = ui({key: (props) => (props.id)})(Test);
 
-  describe('opts.key === undefined', () => {
+  describe('with opts.key === undefined', () => {
     it('assigns a random key to the component', () => {
       const tree = render(
         <div>
@@ -43,7 +42,7 @@ describe('key generation', () => {
     });
   });
 
-  describe('opts.key !== undefined', () => {
+  describe('with opts.key !== undefined && typeof opts.key !== \'function\'', () => {
     it('uses the specified key', () => {
       const tree = render(<WrappedTestWithKey />);
       const c = ReactTestUtils.findRenderedComponentWithType(tree, Test);
@@ -52,8 +51,10 @@ describe('key generation', () => {
       // Check basic setup of the UI key within the first component
       assert(uiKey === testKey, 'uiKey matches opts.key');
     });
+  });
 
-    it('uses function in key', () => {
+  describe('with typeof opts.key === \'function\'', () => {
+    it('uses the specified key', () => {
       const testUIKey = 'ui-key'
       const tree = render(<WrappedTestWithFunctionKey id={testUIKey} />);
       const c = ReactTestUtils.findRenderedComponentWithType(tree, Test);
@@ -63,7 +64,7 @@ describe('key generation', () => {
     });
   });
 
-  describe('props.uiPath', () => {
+  describe('props', () => {
     it('exposes uiPath', () => {
       const c = renderAndFind(<WrappedTestWithKey />, Test);
       const { uiPath } = c.props;
@@ -72,5 +73,4 @@ describe('key generation', () => {
       assert.equal(uiPath, testKey);
     });
   });
-
 });

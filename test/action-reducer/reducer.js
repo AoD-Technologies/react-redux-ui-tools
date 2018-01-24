@@ -14,21 +14,37 @@ import { defaultState } from '../../src/action-reducer.js';
 
 const customReducer = (state, action) => {
   if (action.type === 'CUSTOM_ACTION_TYPE') {
+    return {
+      ...state,
+      isHooked: true
+    }
+  }
+  return state;
+}
+
+const customImmutableJSReducer = (state, action) => {
+  if (action.type === 'CUSTOM_ACTION_TYPE') {
     return state.set('isHooked', true);
   }
   return state;
 }
-const enhancedReducer = reducerEnhancer(customReducer);
 
-describe('reducerEnhancer', () => {
+const reducerEnhancerTest = (reducerToTest, mapImplementation) => {
   let enhancedStore;
 
   beforeEach( () => {
-    enhancedStore = createStore(combineReducers({ ui: enhancedReducer }));
+    enhancedStore = createStore(combineReducers({ ui: reducerToTest }));
   });
 
   it('delegates to the default reducer', () => {
-    assert.isTrue(is(enhancedStore.getState().ui, defaultState));
+    assert.isTrue(
+      mapImplementation === Object ?
+        is(enhancedStore.getState().ui, defaultState)
+      :
+        enhancedStore.getState().ui.size === 1 &&
+        enhancedStore.getState().ui.get('__reducers') &&
+        enhancedStore.getState().ui.get('__reducers').size === 0
+    );
 
     enhancedStore.dispatch({
       type: UPDATE_UI_STATE,
@@ -40,18 +56,26 @@ describe('reducerEnhancer', () => {
     });
 
     assert.isTrue(
-      is(
-        enhancedStore.getState().ui,
-        new Map({
-          __reducers: new Map(),
-          a: new Map({ foo: 'bar' })
-        })
-      )
+      mapImplementation === Object ?
+        enhancedStore.getState().ui.__reducers &&
+        enhancedStore.getState().ui.a &&
+        enhancedStore.getState().ui.a.foo === 'bar'
+      :
+        enhancedStore.getState().ui.get('__reducers') &&
+        enhancedStore.getState().ui.get('__reducers').size === 0 &&
+        enhancedStore.getState().ui.getIn(['a', 'foo']) === 'bar'
     );
   });
 
   it('intercepts custom actions', () => {
-    assert.isTrue(is(enhancedStore.getState().ui, defaultState));
+    assert.isTrue(
+      mapImplementation === Object ?
+        is(enhancedStore.getState().ui, defaultState)
+      :
+        enhancedStore.getState().ui.size === 1 &&
+        enhancedStore.getState().ui.get('__reducers') &&
+        enhancedStore.getState().ui.get('__reducers').size === 0
+    );
 
     enhancedStore.dispatch({
       type: 'CUSTOM_ACTION_TYPE',
@@ -59,19 +83,27 @@ describe('reducerEnhancer', () => {
         foo: 'bar'
       }
     });
+
     assert.isTrue(
-      is(
-        enhancedStore.getState().ui,
-        new Map({
-          __reducers: new Map(),
-          isHooked: true
-        })
-      )
+      mapImplementation === Object ?
+        enhancedStore.getState().ui.__reducers &&
+        enhancedStore.getState().ui.isHooked === true
+      :
+        enhancedStore.getState().ui.get('__reducers') &&
+        enhancedStore.getState().ui.get('__reducers').size === 0 &&
+        enhancedStore.getState().ui.get('isHooked') === true
     );
   });
 
-  it('update ui state by updater', () => {
-    assert.isTrue(is(enhancedStore.getState().ui, defaultState));
+  it('updates ui state by updater', () => {
+    assert.isTrue(
+      mapImplementation === Object ?
+        is(enhancedStore.getState().ui, defaultState)
+      :
+        enhancedStore.getState().ui.size === 1 &&
+        enhancedStore.getState().ui.get('__reducers') &&
+        enhancedStore.getState().ui.get('__reducers').size === 0
+    );
 
     enhancedStore.dispatch({
       type: UPDATE_UI_STATE,
@@ -92,13 +124,19 @@ describe('reducerEnhancer', () => {
     });
 
     assert.isTrue(
-      is(
-        enhancedStore.getState().ui,
-        new Map({
-          __reducers: new Map(),
-          foo: new Map({ bar: 'BAZ' })
-        })
-      )
+      mapImplementation === Object ?
+        enhancedStore.getState().ui.__reducers &&
+        enhancedStore.getState().ui.foo &&
+        enhancedStore.getState().ui.foo.bar === 'BAZ'
+      :
+        enhancedStore.getState().ui.get('__reducers') &&
+        enhancedStore.getState().ui.get('__reducers').size === 0 &&
+        enhancedStore.getState().ui.getIn(['foo', 'bar']) === 'BAZ'
     );
   });
+};
+
+describe('reducerEnhancer', () => {
+  describe('with ImmutableJS state', reducerEnhancerTest.bind(undefined, reducerEnhancer(customImmutableJSReducer, Map), Map));
+  describe('with POJO state', reducerEnhancerTest.bind(undefined, reducerEnhancer(customReducer), Object));
 });

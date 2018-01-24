@@ -7,7 +7,7 @@ import ReactTestUtils from 'react-dom/test-utils';
 import ui, { reducer } from '../../src';
 import { render, renderAndFind } from '../utils/render.js';
 
-describe('display name', () => {
+describe('Display Name', () => {
   class Test extends Component {
     render() { return <p>Hi</p>; }
   }

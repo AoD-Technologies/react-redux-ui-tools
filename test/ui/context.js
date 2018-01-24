@@ -8,8 +8,7 @@ import shallowEqual from 'react-redux/lib/utils/shallowEqual';
 import ui, { reducer } from '../../src';
 import { render, renderAndFind } from '../utils/render.js';
 
-describe('UI state context', () => {
-
+describe('UI State Context', () => {
   describe('single component tree', () => {
     class Test extends Component {
       updateName() { this.props.updateUI('name', 'test'); }
@@ -27,7 +26,7 @@ describe('UI state context', () => {
     };
     const UITest = ui({ state: uiState })(Test);
 
-    it('component gets given expected props', () => {
+    it('component is given expected props', () => {
       const c = renderAndFind(<UITest />, Test);
       assert(typeof c.props.updateUI === 'function', 'has updateUI');
       assert(typeof c.props.resetUI === 'function', 'has resetUI');
@@ -51,7 +50,7 @@ describe('UI state context', () => {
     });
   });
 
-  describe('single-level nested ui component tree', () => {
+  describe('single-level nested UI component tree', () => {
     const uiState = {
       name: 'parent'
     };
@@ -173,7 +172,6 @@ describe('UI state context', () => {
         assert(child.props.ui.name === 'foobar');
       });
     });
-
   });
 
   describe('shared contexts', () => {
@@ -199,7 +197,5 @@ describe('UI state context', () => {
         assert(a.props.ui.name === 'misc');
         assert(shallowEqual(a.props.ui, b.props.ui));
     });
-
   });
-
 });

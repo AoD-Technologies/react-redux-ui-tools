@@ -1,6 +1,5 @@
 'use strict';
 
-import { Map } from 'immutable';
 import invariant from 'invariant';
 import { get, getIn, setIn, updateIn, deleteIn, withMutations } from './utils';
 
@@ -17,18 +16,7 @@ export const SET_DEFAULT_UI_STATE = '@@redux-ui/SET_DEFAULT_UI_STATE';
 const MOUNT_UI_STATE = '@@redux-ui/MOUNT_UI_STATE';
 const UNMOUNT_UI_STATE = '@@redux-ui/UNMOUNT_UI_STATE';
 
-export const defaultState = new Map({
-  __reducers: new Map({
-    // This contains a map of component paths (joined by '.') to an object
-    // containing the fully qualified path and the reducer function:
-    // 'parent.child': {
-    //   path: ['parent', 'child'],
-    //   func: (state, action) => { ... }
-    // }
-  })
-});
-
-export const defaultPOJOState = {
+export const defaultState = {
   __reducers: {
     // This contains a map of component paths (joined by '.') to an object
     // containing the fully qualified path and the reducer function:
@@ -39,9 +27,18 @@ export const defaultPOJOState = {
   }
 };
 
-export default function reducer(state, action, usePOJOs) {
+export default function reducer(state, action, mapImplementation = Object) {
   if (typeof state === 'undefined') {
-    state = usePOJOs ? defaultPOJOState : defaultState;
+    if (mapImplementation === Object) {
+      state = defaultState;
+    } else {
+      state = new mapImplementation({
+        ...defaultState,
+        __reducers: new mapImplementation({
+          ...defaultState.__reducers
+        })
+      });
+    }
   }
 
   let key = action.payload && (action.payload.key || []);
@@ -78,14 +75,14 @@ export default function reducer(state, action, usePOJOs) {
 
     case SET_DEFAULT_UI_STATE:
       // Replace all UI under a key with the given values
-      state = setIn(state, key, usePOJOs ? action.payload.value : new Map(action.payload.value));
+      state = setIn(state, key, mapImplementation === Object ? action.payload.value : new mapImplementation(action.payload.value));
       break;
 
     case MOUNT_UI_STATE:
       const { defaults, customReducer } = action.payload;
       state = withMutations( state, s => {
         // Set the defaults for the component
-        s.setIn(key, usePOJOs ? defaults : new Map(defaults));
+        s.setIn(key, mapImplementation === Object ? defaults : new mapImplementation(defaults));
 
         // If this component has a custom reducer add it to the list.
         // We store the reducer func and UI path for the current component
@@ -115,9 +112,9 @@ export default function reducer(state, action, usePOJOs) {
   }
 
   const customReducers = get(state, '__reducers');
-  if (customReducers[usePOJOs ? 'length' : 'size'] > 0) {
+  if ((mapImplementation === Object ? Object.keys(customReducers).length : customReducers.size) > 0) {
     state = withMutations(state, mut => {
-      customReducers.forEach(r => {
+      (mapImplementation === Object ? Object.values(customReducers) : customReducers).forEach(r => {
         // This calls each custom reducer with the UI state for each custom
         // reducer with the component's UI state tree passed into it.
         //
@@ -148,8 +145,8 @@ export default function reducer(state, action, usePOJOs) {
   return state;
 }
 
-export const reducerEnhancer = (customReducer) => (state, action) => {
-  state = reducer(state, action);
+export const reducerEnhancer = (customReducer, mapImplementation) => (state, action) => {
+  state = reducer(state, action, mapImplementation);
   if (typeof customReducer === 'function') {
     state = customReducer(state, action);
   }

@@ -8,7 +8,7 @@ import shallowEqual from 'react-redux/lib/utils/shallowEqual';
 import ui, { reducer } from '../../src';
 import { render, renderAndFind } from '../utils/render.js';
 
-describe('Prop validation', () => {
+describe('Prop Validation', () => {
   class Child extends Component {
     render = () => <p>Child</p>
   }

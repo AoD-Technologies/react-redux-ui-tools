@@ -51,12 +51,12 @@
     "babel-register": "^6.6.0",
     "chai": "^3.4.1",
     "del-cli": "^1.1.0",
+    "immutable": "^3.8.2",
     "jsdom": "^7.2.1",
     "mocha": "^2.3.4",
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "immutable": "^3.7.5",
     "invariant": "^2.2.0",
     "prop-types": "^15.5.7",
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0",
