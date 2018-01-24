@@ -1,3 +1,6 @@
+# v1.0.0
+- Remove run-time dependency on Immutable.JS
+
 # v0.1.2
 - Add option to use POJOs for UI state
 - Fix the build system so that published updates get properly installed
