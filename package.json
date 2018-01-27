@@ -1,6 +1,6 @@
 {
   "name": "react-redux-ui-tools",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "UI state management for React with Redux",
   "main": "dist/index.js",
   "files": [
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jhorowitz-firedrum/redux-ui.git"
+    "url": "git+https://github.com/jhorowitz-firedrum/react-redux-ui-tools.git"
   },
   "keywords": [
     "react-component",
@@ -39,9 +39,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jhorowitz-firedrum/redux-ui/issues"
+    "url": "https://github.com/jhorowitz-firedrum/react-redux-ui-tools/issues"
   },
-  "homepage": "https://github.com/jhorowitz-firedrum/redux-ui#readme",
+  "homepage": "https://github.com/jhorowitz-firedrum/react-redux-ui-tools#readme",
   "devDependencies": {
     "babel-cli": "6.5.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
