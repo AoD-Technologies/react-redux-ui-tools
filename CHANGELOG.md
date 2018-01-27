@@ -1,3 +1,6 @@
+# v1.0.5
+- Update README.md to reference the new repository name in the CircleCI status badge.
+
 # v1.0.4
 - Version bump to sync github and npm releases.
 
