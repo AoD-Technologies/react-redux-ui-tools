@@ -8,13 +8,13 @@ import { get, getIn, setIn, updateIn, deleteIn, withMutations } from './utils';
 // key of the object to update or do transformations within one action in the
 // reducer. The latter only triggers one store change event and is more
 // performant.
-export const MASS_UPDATE_UI_STATE = '@@redux-ui/MASS_UPDATE_UI_STATE';
-export const UPDATE_UI_STATE = '@@redux-ui/UPDATE_UI_STATE';
-export const SET_DEFAULT_UI_STATE = '@@redux-ui/SET_DEFAULT_UI_STATE';
+export const MASS_UPDATE_UI_STATE = '@@react-redux-ui-tools/MASS_UPDATE_UI_STATE';
+export const UPDATE_UI_STATE = '@@react-redux-ui-tools/UPDATE_UI_STATE';
+export const SET_DEFAULT_UI_STATE = '@@react-redux-ui-tools/SET_DEFAULT_UI_STATE';
 
 // These are private consts used in actions only given to the UI decorator.
-const MOUNT_UI_STATE = '@@redux-ui/MOUNT_UI_STATE';
-const UNMOUNT_UI_STATE = '@@redux-ui/UNMOUNT_UI_STATE';
+const MOUNT_UI_STATE = '@@react-redux-ui-tools/MOUNT_UI_STATE';
+const UNMOUNT_UI_STATE = '@@react-redux-ui-tools/UNMOUNT_UI_STATE';
 
 export const defaultState = {
   __reducers: {
