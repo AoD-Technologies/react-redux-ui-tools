@@ -1,3 +1,9 @@
+# v1.0.4
+- Version bump to sync github and npm releases.
+
+# v1.0.3
+- Update package.json with the new repository, etc. URLs.
+
 # v1.0.2
 - Fix a few references to the old package name.
 - Export the MASS_UPDATE_UI_STATE, UPDATE_UI_STATE, and SET_DEFAULT_UI_STATE action types from the main library entry point.
