@@ -1,3 +1,6 @@
+# v1.0.1
+- Rename package to react-redux-ui-tools
+
 # v1.0.0
 - Remove run-time dependency on Immutable.JS
 
