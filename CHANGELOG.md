@@ -1,3 +1,12 @@
+# v1.0.6
+- Fix #1 - Add `transform-runtime` plugin to .babelrc.
+- Further .babelrc cleanup:
+   - Remove `babel-preset-stage-0` preset.
+   - Add `transform-object-rest-spread` plugin.
+   - Add `transform-function-bind` plugin.
+   - Add `transform-class-properties` plugin.
+- Remove React warning regarding requestAnimationFrame polyfill during unit test execution.
+
 # v1.0.5
 - Update README.md to reference the new repository name in the CircleCI status badge.
 
