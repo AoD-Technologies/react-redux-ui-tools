@@ -104,7 +104,7 @@ mergeProps passed to react-redux's `connect`.
 
 ##### `options`: object, optional
 
-options passed to react-redux's `connect`..
+options passed to react-redux's `connect`.
 
 ### Example configuration:
 
@@ -186,6 +186,7 @@ export default ui( uiConfig )( SomeComponent )
 **NOTE**: If you wish to use Immutable.JS for UI state, add the react-redux-ui-tools reducer with a third parameter set to Immutable.JS' Map class, e.g.:
 ```js// rootReducer.js
 import { combineReducers } from 'redux'
+import { Map } from 'immutable'
 import { reducer as ui } from 'react-redux-ui-tools'
 
 const createRootReducer = reducers => {
