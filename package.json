@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jhorowitz-firedrum/react-redux-ui-tools.git"
+    "url": "git+https://github.com/AoD-Technologies/react-redux-ui-tools.git"
   },
   "keywords": [
     "react-component",
@@ -39,9 +39,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jhorowitz-firedrum/react-redux-ui-tools/issues"
+    "url": "https://github.com/AoD-Technologies/react-redux-ui-tools/issues"
   },
-  "homepage": "https://github.com/jhorowitz-firedrum/react-redux-ui-tools#readme",
+  "homepage": "https://github.com/AoD-Technologies/react-redux-ui-tools#readme",
   "devDependencies": {
     "babel-cli": "6.5.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
