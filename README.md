@@ -1,5 +1,5 @@
 # React Redux UI Tools
-[![Circle CI](https://circleci.com/gh/jhorowitz-firedrum/react-redux-ui-tools.svg?style=svg)](https://circleci.com/gh/jhorowitz-firedrum/react-redux-ui-tools)
+[![Circle CI](https://circleci.com/gh/AoD-Technologies/react-redux-ui-tools.svg?style=svg)](https://circleci.com/gh/AoD-Technologies/react-redux-ui-tools)
 
 #### Think of react-redux-ui-tools as **block-level scoping** for UI state.
 
