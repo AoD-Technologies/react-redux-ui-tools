@@ -1,3 +1,8 @@
+# v1.0.7
+ - Fix Immutable.JS example in README.md (add missing `import { Map } from 'immutable'` statement).
+ - Fix README.md grammar (remove extra period).
+ - Change github.com references in package.json to reflect the transfer of repository ownership to the AoD Technologies organization.
+
 # v1.0.6
 - Fix #1 - Add `transform-runtime` plugin to .babelrc.
 - Further .babelrc cleanup:
