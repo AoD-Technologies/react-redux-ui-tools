@@ -1,3 +1,7 @@
+# v1.0.9
+- Add package-lock.json to version control.
+- Move Redux and React-Redux out of dependencies to devDependencies and peerDependencies.
+
 # v1.0.8
 - Update README.md to reference the new repository owner in the CircleCI status badge.
 - Move React back out of dependencies to devDependencies and peerDependencies (thanks @krzysiek1507)
