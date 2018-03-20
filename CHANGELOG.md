@@ -1,7 +1,11 @@
+# v1.0.8
+- Update README.md to reference the new repository owner in the CircleCI status badge.
+- Move React back out of dependencies to devDependencies and peerDependencies (thanks @krzysiek1507)
+
 # v1.0.7
- - Fix Immutable.JS example in README.md (add missing `import { Map } from 'immutable'` statement).
- - Fix README.md grammar (remove extra period).
- - Change github.com references in package.json to reflect the transfer of repository ownership to the AoD Technologies organization.
+- Fix Immutable.JS example in README.md (add missing `import { Map } from 'immutable'` statement).
+- Fix README.md grammar (remove extra period).
+- Change github.com references in package.json to reflect the transfer of repository ownership to the AoD Technologies organization.
 
 # v1.0.6
 - Fix #1 - Add `transform-runtime` plugin to .babelrc.
