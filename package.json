@@ -1,6 +1,6 @@
 {
   "name": "react-redux-ui-tools",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "UI state management for React with Redux",
   "main": "dist/index.js",
   "files": [
@@ -58,8 +58,8 @@
     "jsdom": "^7.2.1",
     "mocha": "^2.3.4",
     "raf": "^3.4.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "react-redux": "^5.0.0",
     "redux": "^4.0.0"
   },
