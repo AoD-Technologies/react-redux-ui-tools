@@ -1,18 +1,21 @@
 {
-    "presets": ["es2015", "react"],
-    "plugins": [
-		"transform-object-rest-spread",
-		"transform-function-bind",
-		"transform-decorators-legacy",
-		"transform-class-properties",
-		[
-			"transform-runtime",
-			{
-				"helpers": true,
-				"polyfill": true,
-				"regenerator": false,
-				"moduleName": "babel-runtime"
-			}
-		]
-	]
+  "presets": [
+    "env",
+    "react"
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-function-bind",
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    [
+      "transform-runtime",
+      {
+        "helpers": true,
+        "polyfill": true,
+        "regenerator": false,
+        "moduleName": "babel-runtime"
+      }
+    ]
+  ]
 }
