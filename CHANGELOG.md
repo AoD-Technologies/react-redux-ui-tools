@@ -1,3 +1,7 @@
+# v1.0.11
+- Use babel-preset-env and update babel-cli (thanks @krzysiek1507)
+- Update dependencies.
+
 # v1.0.10
 - Allow peer dependency of Redux v4 (thanks @krzysiek1507)
 
