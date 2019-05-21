@@ -13,7 +13,7 @@
     "build": "babel ./src -d ./dist",
     "prepare": "npm run build",
     "pretest": "npm run build",
-    "test": "mocha --compilers js:babel-register --recursive --require ./test/setup.js",
+    "test": "mocha --require babel-core/register --recursive --require ./test/setup.js",
     "start": "npm run dev",
     "dev": "npm test -- -w"
   },
@@ -52,16 +52,16 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.6.0",
-    "chai": "^3.4.1",
+    "chai": "^4.2.0",
     "del-cli": "^1.1.0",
     "immutable": "^3.8.2",
-    "jsdom": "^7.2.1",
-    "mocha": "^2.3.4",
-    "raf": "^3.4.0",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "jsdom": "^15.1.0",
+    "mocha": "^6.1.4",
+    "raf": "^3.4.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-redux": "^5.0.0",
-    "redux": "^4.0.0"
+    "redux": "^4.0.1"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
