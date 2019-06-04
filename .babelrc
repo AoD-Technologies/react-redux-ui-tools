@@ -1,20 +1,24 @@
 {
   "presets": [
-    "env",
-    "react"
+    "@babel/preset-env",
+    "@babel/preset-react"
   ],
   "plugins": [
-    "transform-object-rest-spread",
-    "transform-function-bind",
-    "transform-decorators-legacy",
-    "transform-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-function-bind",
     [
-      "transform-runtime",
+      "@babel/plugin-proposal-decorators",
       {
+        "legacy": true
+      }
+    ],
+    "@babel/plugin-proposal-class-properties",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": 2,
         "helpers": true,
-        "polyfill": true,
-        "regenerator": false,
-        "moduleName": "babel-runtime"
+        "regenerator": false
       }
     ]
   ]
